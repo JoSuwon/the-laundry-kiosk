@@ -1,0 +1,66 @@
+$baseColor:#00a0e8; //대표컬러
+$baseColorDeep:#0084b2; //대표컬러,진하게
+
+.wrap{
+	height:1920px;
+	display:flex;
+	flex-direction: column;
+  background: $baseColor;
+	font-size:36px;
+	font-family:'NotoSansKR';
+	font-weight:400;
+	overflow:hidden;
+
+	.contents{
+		flex:1;
+	}
+}
+
+// 메인페이지
+
+.home{
+	.btns{
+		.login{
+			label{
+				color:$baseColor;
+			}
+		}
+	}
+}
+
+// 메인웨이브
+
+.waves{
+	.wave1{
+		background:$baseColor;
+	}
+	.wave2{
+		background:$baseColor;
+	}
+	.wave3{
+		background:$baseColor;
+	}
+}
+
+// 서브페이지 제목
+
+.titleHead{
+	.homeBtn{
+		.v-icon{
+			color:$baseColor
+		}
+	}
+}
+
+// 유저로그인 (휴대폰번호 입력)
+
+.userLogin{
+	.numberView{
+		span{
+			color:$baseColor
+		}
+	}
+}
+
+
+
