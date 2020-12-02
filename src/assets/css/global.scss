@@ -1,6 +1,10 @@
 $baseColor:#00a0e8; //대표컬러
 $baseColorDeep:#0084b2; //대표컬러,진하게
 
+html{
+	overflow-y: unset;
+}
+
 .wrap{
 	height:1920px;
 	display:flex;
@@ -15,6 +19,8 @@ $baseColorDeep:#0084b2; //대표컬러,진하게
 		flex:1;
 	}
 }
+
+
 
 // 메인페이지
 

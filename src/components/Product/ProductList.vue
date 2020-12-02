@@ -113,6 +113,21 @@ export default {
     dd{
       overflow-y:scroll;
       padding:15px;
+      &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #ced4da;
+
+        &:hover {
+          background-color: #adb5bd;
+        }
+      }
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0);
+      }
 
       .item{
         display:flex;
@@ -170,6 +185,22 @@ export default {
     dd{
       overflow-y:scroll;
       padding:15px;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #ced4da;
+
+        &:hover {
+          background-color: #adb5bd;
+        }
+      }
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0);
+      }
 
       .item{
         padding:15px;

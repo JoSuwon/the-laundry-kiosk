@@ -140,7 +140,7 @@ export default new Vuex.Store({
     },
     async updatePassword({ state }, { phone, oldPassword, newPassword }) {
       const companyId = state.company.id;
-      console.log(companyId, phone, oldPassword, newPassword);
+      // console.log(companyId, phone, oldPassword, newPassword);
       await kioskAPI({
         method: 'put',
         url: '/user/password',

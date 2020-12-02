@@ -114,7 +114,7 @@ export default {
   background:rgba(255,255,255,1);
   border-radius:15px;
   box-shadow: 0 0 30px rgba(0,0,0,0.15);
-  overflow-y:scroll;
+  overflow-y:hidden;
   padding:30px;
 
   .divider{

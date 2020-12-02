@@ -1,17 +1,21 @@
 <template>
   <div class="home">
     <v-carousel
-      v-model="adsIndex"
       height="1920"
       hide-delimiters
       :show-arrows-on-hover="false"
       :show-arrows="false"
+      :cycle="true"
+      interval="5000"
     >
-      <v-carousel-item>
+      <!-- <v-carousel-item>
         <img src="http://admin.payot-coin.com/kiosk/sb01.png">
       </v-carousel-item>
       <v-carousel-item>
         <img src="http://admin.payot-coin.com/kiosk/sb02.png">
+      </v-carousel-item> -->
+      <v-carousel-item v-for="item in slides" :key="item">
+          <img :src="item.url">
       </v-carousel-item>
     </v-carousel>
 
@@ -52,7 +56,15 @@ export default {
   },
   data() {
     return {
-      adsIndex: 0,
+      slides:[
+        {url:'./image/main-sb-01.png'},
+        {url:'./image/main-sb-02.png'},
+        {url:'./image/main-sb-03.png'},
+        {url:'./image/main-sb-04.png'},
+        {url:'./image/main-sb-05.png'},
+        {url:'./image/main-sb-06.png'},
+        {url:'./image/main-sb-07.png'}
+      ],
       action: [
         { name: 'Phone', redirectRouteName: 'PointGuide', mode: 'Charge' },
         { name: 'Phone', redirectRouteName: 'OrderGuide', mode: 'Use' },
@@ -73,15 +85,12 @@ export default {
   },
   mounted() {
     this.$store.commit('CLEAR_ACTION');
-    setInterval(() => {
-      this.adsIndex++;
-    }, 4000);
   },
   methods: {
     nextStep({ name, redirectRouteName, mode }) {
       if(name === 'GuideList') this.$router.push({ name });
       else {
-        if(this.hideNoticePage) {
+        if(this.$store.state.kiosk.Options && this.hideNoticePage) {
           if(mode === 'Charge') redirectRouteName = 'Point';
           else if(mode === 'Use') redirectRouteName = 'Product';
         }

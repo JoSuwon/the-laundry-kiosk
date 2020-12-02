@@ -47,7 +47,7 @@ ipcRenderer.on('hook', (event, { topic, message: payload }) => {
       });
       break;
     case 'warning':
-      console.log('warning');
+      // console.log('warning');
       sound.warningPlay();
       break;
     default:

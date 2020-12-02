@@ -158,7 +158,7 @@ export default {
       await this.delay(2000);
       this.appendAction({ price });
       const res = await this.chargePoint();
-      console.log(res);
+      // console.log(res);
       if(res.status === 200) {
         const point = res.data.havePoint;
         this.appendUser({ point });
@@ -171,7 +171,7 @@ export default {
       await this.delay(2000);
       this.run()
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           const point = res.data.point;
           this.appendUser({ point });
           this.$refs.progressModal.show(false);
@@ -185,7 +185,7 @@ export default {
             this.errorMsg = '보유하신 포인트가 부족합니다';
             this.$refs.errorModal.show(true);
           } else {
-            console.log(error.response);
+            // console.log(error.response);
             this.$refs.progressModal.show(false);
             this.errorMsg = '장비와의 통신이 원활하지 않습니다';
             this.$refs.errorModal.show(true);

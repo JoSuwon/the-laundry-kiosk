@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="overflow:hidden">
     <div class="wrap">
       <StateBar />
       <div class="contents">
@@ -18,3 +18,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+</style>

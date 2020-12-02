@@ -50,7 +50,7 @@ export default {
   background: #fff;
   border-radius: 15px;
   padding: 50px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
 
   dl {

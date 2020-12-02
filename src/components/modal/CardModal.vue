@@ -25,7 +25,7 @@
 					</dl>
 				</div>
 				<div class="counter">
-					<span>{{ count }}}</span>
+					<span>{{ count }}</span>
 				</div>
 			</div>
 		</div>
@@ -58,8 +58,8 @@ export default {
           .then(value => {
             this.$emit('onPay', parseInt(value, 10));
             this.show(false);
-          }).catch(error => {
-            console.log(error.message);
+          }).catch(() => {
+            // console.log(error.message);
             this.show(false);
           });
       } else {

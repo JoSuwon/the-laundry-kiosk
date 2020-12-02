@@ -55,6 +55,7 @@ async function createWindow() {
     }
   });
 
+  // win.setMenu(null);
   if(!isDevelopment) win.setMenu(null);
   window = win;
 

@@ -54,7 +54,7 @@ export default {
 	left:0px;
 	width:100%;
 	flex:1;
-	overflow-y:scroll;
+	overflow-y:hidden;
 	img{width:100%;}
 }
 

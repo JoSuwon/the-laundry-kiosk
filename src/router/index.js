@@ -138,9 +138,20 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const isAccountLogin = store.state.company.id;
+  const loginLessPageName = ['AdminLogin', 'Error'].includes(to.name);
+
+  if(!isAccountLogin && !loginLessPageName) {
+    next({ name: 'AdminLogin' });
+  } else {
+    next();
+  }
 });
 
 export default router;

@@ -4,7 +4,7 @@ import router from '../router';
 import store from '../store';
 
 function nowNetworkStatus() {
-  console.log(navigator);
+  // console.log(navigator);
   return navigator.onLine;
 }
 
@@ -22,7 +22,7 @@ networkStatusChange$
   .subscribe(
     () => {
       // 오류 페이지로 이동
-      console.log('go');
+      // console.log('go');
       router.replace({
         name: 'Error',
         params: {
