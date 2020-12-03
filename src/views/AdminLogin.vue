@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="contents">
-      <dl class="loginTitle">
+      <dl class="loginTitle" @click="exitCount++">
         <dt>관리자로그인</dt>
         <dd>ADMINISTRATOR LOGIN</dd>
       </dl>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { remote } from 'electron';
 import { mapActions, mapMutations } from 'vuex';
 
 export default {
@@ -84,7 +85,15 @@ export default {
         hideNoticePage: false,
       },
       errorMsg: '',
+      exitCount: 0,
     };
+  },
+  watch: {
+    exitCount(newValue) {
+      if(newValue === 15) {
+        remote.app.exit();
+      }
+    },
   },
   methods: {
     ...mapMutations({

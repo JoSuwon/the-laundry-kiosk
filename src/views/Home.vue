@@ -14,7 +14,7 @@
       <v-carousel-item>
         <img src="http://admin.payot-coin.com/kiosk/sb02.png">
       </v-carousel-item> -->
-      <v-carousel-item v-for="item in slides" :key="item">
+      <v-carousel-item v-for="item in slides" :key="item.id">
           <img :src="item.url">
       </v-carousel-item>
     </v-carousel>
