@@ -1,10 +1,9 @@
 import { fromEvent, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import router from '../router';
-import store from '../store';
+// import store from '../store';
 
 function nowNetworkStatus() {
-  // console.log(navigator);
   return navigator.onLine;
 }
 
@@ -39,12 +38,12 @@ networkStatusChange$
   .pipe(
     debounceTime(5 * 1000),
     filter(state => state),
-    filter(() => store.state.remote.isSales),
+    // filter(() => store.state.remote.isSales),
   )
   .subscribe(
     () => {
       // 메인페이지로 이동
-      router.replace({ name: 'Main' });
+      router.replace({ name: 'Home' });
     },
     () => {},
   );

@@ -9,6 +9,7 @@ import './plugins/axios';
 import './plugins/idle';
 import './plugins/network_event';
 import './plugins/sound';
+import './plugins/hooks';
 
 Vue.config.productionTip = false;
 

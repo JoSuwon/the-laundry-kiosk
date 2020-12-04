@@ -178,6 +178,24 @@ export default new Vuex.Store({
         data: form,
       });
       return res;
+    },
+    async refreshKioskConfig({ state, commit }) {
+      // console.log('refreshKioskConfig');
+      // state.kiosk 정보는 adminLogin시 주입
+      // state.company, state.machines 정보 새로고침 필요
+      const { data } = await kioskAPI({
+        method: 'get',
+        url: `/company/${state.company.id}`,
+      });
+      const { franchiseId, name, tel } = data;
+      commit('SET_COMPANY', Object.assign(state.company, { franchiseId, name, tel }));
+
+      const { data:machines } = await kioskAPI({
+        method: 'get',
+        url: `/company/${state.company.id}/devices`,
+      });
+      commit('SET_MACHINES', machines);
+
     }
   },
   modules: {},

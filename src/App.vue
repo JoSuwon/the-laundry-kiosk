@@ -16,6 +16,21 @@ export default {
   components: {
     StateBar,
   },
+  data() {
+    return {
+      ignoreIdlePageName: [
+        'AdminLogin',
+        'Home',
+        'Detail',
+        'Error',
+      ],
+    };
+  },
+  onIdle() {
+    const { name } = this.$route;
+    if(this.ignoreIdlePageName.includes(name)) return;
+    this.$router.replace({ name: 'Home' });
+  }
 };
 </script>
 

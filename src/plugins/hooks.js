@@ -2,7 +2,7 @@ import { ipcRenderer, remote } from 'electron';
 import { reboot, shutdown } from 'electron-shutdown-command';
 import store from '../store';
 import router from '../router';
-import sound from './sound.js';
+// import sound from './sound.js';
 
 /**
  * 프로그램 실행시 키오스크 이벤트 푸시 구독하기
@@ -13,8 +13,9 @@ function subscribe() {
   ipcRenderer.invoke('login', id);
 }
 
-ipcRenderer.on('hook', (event, { topic, message: payload }) => {
+ipcRenderer.on('hook', (event, { topic }) => {
   const [, , , action] = topic.split('/');
+  console.log(action);
   switch (action) {
     case 'shutdown':
       // 키오스크 PC 종료
@@ -27,6 +28,7 @@ ipcRenderer.on('hook', (event, { topic, message: payload }) => {
     case 'restart':
       // 키오스크 프로그램 재실행
       remote.app.relaunch();
+      remote.app.exit();
       break;
     case 'exit':
       // 키오스크 프로그램 종료
@@ -34,7 +36,7 @@ ipcRenderer.on('hook', (event, { topic, message: payload }) => {
       break;
     case 'sale':
       // 키오스크 이용 가능 상태 변경
-      router.replace({ name: 'Main' });
+      router.replace({ name: 'Home' });
       break;
     case 'fix':
       // 키오스크 이용 불가 상태 변경
@@ -46,10 +48,10 @@ ipcRenderer.on('hook', (event, { topic, message: payload }) => {
         },
       });
       break;
-    case 'warning':
-      // console.log('warning');
-      sound.warningPlay();
-      break;
+    // case 'warning':
+    //   // console.log('warning');
+    //   sound.warningPlay();
+    //   break;
     default:
       // 키오스크 상태 정보 갱신
       store.dispatch('refreshKioskConfig');

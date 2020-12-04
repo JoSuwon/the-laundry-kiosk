@@ -30,6 +30,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex: 1;
+  height: 100%;
   .v-icon {
     font-size: 150px;
     color: #fff;
