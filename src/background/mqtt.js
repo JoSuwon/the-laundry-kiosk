@@ -8,7 +8,7 @@ let eventer;
 ipcMain.handle('login', (event, id) => {
   eventer = event;
   const topic = `kiosk/${id}/control/+`;
-  console.log(topic);
+  // console.log(topic);
   client.subscribe(topic);
 });
 
