@@ -48,9 +48,9 @@ export default new Vuex.Store({
   //       });
   //     });
   //     console.log(selectedMachine, selectedProduct);
-  //     return { 
-  //       machine: selectedMachine.name, 
-  //       product: selectedProduct.name, 
+  //     return {
+  //       machine: selectedMachine.name,
+  //       product: selectedProduct.name,
   //       runTimeSec: selectedProduct.runTimeSec
   //     };
   //   },
@@ -114,9 +114,14 @@ export default new Vuex.Store({
           url: '/user',
           params: { company, phone },
         });
-        commit('SET_USER', { companyId: user.companyId, phone, point: parseInt(user.point, 10), newUser: false });
+        commit('SET_USER', {
+          companyId: user.companyId,
+          phone,
+          point: parseInt(user.point, 10),
+          newUser: false,
+        });
         return true;
-      } catch(err) {
+      } catch (err) {
         commit('SET_USER', { companyId: company, phone, point: 0, newUser: true });
         return false;
       }
@@ -130,7 +135,7 @@ export default new Vuex.Store({
           data: { companyId, phone, password },
         });
         return true;
-      } catch(err) {
+      } catch (err) {
         return false;
       }
     },
@@ -153,7 +158,7 @@ export default new Vuex.Store({
       });
     },
     async chargePoint({ state }) {
-      if(state.user.newUser) {
+      if (state.user.newUser) {
         await this.dispatch('userSignup');
       }
       const form = state.userAction;
@@ -182,7 +187,13 @@ export default new Vuex.Store({
         url: '/run',
         data: form,
       });
-      return res;
+      return Object.assign({}, res, {
+        data: {
+          ...res.data,
+          point: parseInt(res.data.point, 10),
+        },
+      });
+      // return res;
     },
     async refreshKioskConfig({ state, commit }) {
       // console.log('refreshKioskConfig');
@@ -195,13 +206,12 @@ export default new Vuex.Store({
       const { franchiseId, name, tel } = data;
       commit('SET_COMPANY', Object.assign(state.company, { franchiseId, name, tel }));
 
-      const { data:machines } = await kioskAPI({
+      const { data: machines } = await kioskAPI({
         method: 'get',
         url: `/company/${state.company.id}/devices`,
       });
       commit('SET_MACHINES', machines);
-
-    }
+    },
   },
   modules: {},
 });

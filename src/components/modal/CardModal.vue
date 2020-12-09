@@ -19,7 +19,7 @@
 					<dl class="price">
 						<dt>결제예정금액</dt>
 						<dd>
-							<strong class="num">{{ parseInt(inputAmount, 10) | numeral(0, 0) }}</strong>
+							<strong class="num">{{ parseInt(inputAmount, 10) | numeral('0,0') }}</strong>
 							<span>원</span>
 						</dd>
 					</dl>

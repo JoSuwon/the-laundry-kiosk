@@ -7,13 +7,9 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import path from 'path';
 const isDevelopment = process.env.NODE_ENV !== "production";
 
-
 import './background/serialport';
 import './background/mqtt';
-// import './background/koces';
-
-
-
+import './background/koces';
 
 let window;
 

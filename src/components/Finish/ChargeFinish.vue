@@ -11,17 +11,17 @@
     <div class="divider" />
     <dl>
       <dt>결제 금액</dt>
-      <dd>{{ this.userAction.price | numeral(0, 0) }} 원</dd>
+      <dd>{{ this.userAction.price | numeral('0,0') }} 원</dd>
     </dl>
     <dl class="bonus">
       <dt>적립된 포인트({{ this.userAction.rate * 100 }}%)</dt>
       <dd>
-        {{ Math.floor(this.userAction.rate * this.userAction.price) | numeral(0, 0) }} 포인트
+        {{ Math.floor(this.userAction.rate * this.userAction.price) | numeral('0,0') }} 포인트
       </dd>
     </dl>
     <dl class="total">
       <dt>보유 포인트</dt>
-      <dd>{{ this.user.point | numeral(0, 0) }} 포인트</dd>
+      <dd>{{ this.user.point | numeral('0,0') }} 포인트</dd>
     </dl>
   </div>
 </template>

@@ -27,7 +27,7 @@
         >
           <div class="itemName">{{ item.name }}</div>
           <div class="itemInfo">
-            <span class="price"><b>{{ parseInt(item.price, 10) | numeral(0, 0) }}</b>원</span>
+            <span class="price"><b>{{ parseInt(item.price, 10) | numeral('0,0') }}</b>원</span>
           </div>
         </div>
       </dd>

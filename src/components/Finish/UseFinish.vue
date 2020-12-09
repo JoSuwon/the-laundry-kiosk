@@ -15,16 +15,16 @@
     </dl>
     <dl>
       <dt>상품가격</dt>
-      <dd>{{ parseInt(selectedProduct.price, 10) | numeral(0, 0) }} 원</dd>
+      <dd>{{ parseInt(selectedProduct.price, 10) | numeral('0,0') }} 원</dd>
     </dl>
     <div class="divider" />
     <dl>
       <dt>사용된 포인트</dt>
-      <dd>{{ parseInt(selectedProduct.price, 10) | numeral(0, 0) }} 포인트</dd>
+      <dd>{{ parseInt(selectedProduct.price, 10) | numeral('0,0') }} 포인트</dd>
     </dl>
     <dl class="total">
       <dt>남은 포인트</dt>
-      <dd>{{ parseInt(user.point, 10) | numeral(0, 0) }} 포인트</dd>
+      <dd>{{ parseInt(user.point, 10) | numeral('0,0') }} 포인트</dd>
     </dl>
   </div>
 </template>

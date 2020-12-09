@@ -9,7 +9,7 @@
       </dl>
       <dl class="myPoint">
         <dt>보유 포인트</dt>
-        <dd>{{ user.point | numeral(0, 0) }} P</dd>
+        <dd>{{ user.point | numeral('0,0') }} P</dd>
       </dl>
     </div>
     <div class="point-list">
@@ -21,17 +21,17 @@
                 충전
               </dt>
               <dd>
-                <strong>{{ item | numeral(0, 0) }}</strong>원
+                <strong>{{ item | numeral('0,0') }}</strong>원
               </dd>
             </dl>
             <div class="divider" />
             <dl>
               <dt>카드 추가적립({{ Math.floor(eventRate.card * 100) }}%)</dt>
-              <dd>{{ Math.floor(item * eventRate.card) | numeral(0, 0) }} P</dd>
+              <dd>{{ Math.floor(item * eventRate.card) | numeral('0,0') }} P</dd>
             </dl>
             <dl>
               <dt>현금 추가적립({{ Math.floor(eventRate.cash * 100) }}%)</dt>
-              <dd>{{ Math.floor(item * eventRate.cash) | numeral(0, 0) }} P</dd>
+              <dd>{{ Math.floor(item * eventRate.cash) | numeral('0,0') }} P</dd>
             </dl>
           </div>
         </v-col>

@@ -3,7 +3,7 @@
     <dt>나의 포인트</dt>
     <dd>
       <span>
-        <strong>{{ user.point | numeral(0, 0) }}</strong> 포인트
+        <strong>{{ user.point | numeral('0,0') }}</strong> 포인트
       </span>
       <v-btn text @click="$router.push('PointGuide')">충전하기</v-btn>
     </dd>
