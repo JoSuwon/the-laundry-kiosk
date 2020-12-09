@@ -15,7 +15,7 @@
         <img src="http://admin.payot-coin.com/kiosk/sb02.png">
       </v-carousel-item> -->
       <v-carousel-item v-for="item in slides" :key="item.id">
-          <img :src="item.url">
+          <img :src="`http://admin.payot-coin.com/kiosk/5.0.0/${item.url}`">
       </v-carousel-item>
     </v-carousel>
 
@@ -57,13 +57,13 @@ export default {
   data() {
     return {
       slides:[
-        {url:'./image/main-sb-01.png'},
-        {url:'./image/main-sb-02.png'},
-        {url:'./image/main-sb-03.png'},
-        {url:'./image/main-sb-04.png'},
-        {url:'./image/main-sb-05.png'},
-        {url:'./image/main-sb-06.png'},
-        {url:'./image/main-sb-07.png'}
+        {url:'main-sb-01.png'},
+        {url:'main-sb-02.png'},
+        {url:'main-sb-03.png'},
+        {url:'main-sb-04.png'},
+        {url:'main-sb-05.png'},
+        {url:'main-sb-06.png'},
+        {url:'main-sb-07.png'}
       ],
       action: [
         { name: 'Phone', redirectRouteName: 'PointGuide', mode: 'Charge' },

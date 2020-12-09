@@ -66,7 +66,7 @@ export default {
         return;
       }
 
-      if(this.myPoint >= this.selectedProduct.price) {
+      if(parseInt(this.myPoint, 10) >= parseInt(this.selectedProduct.price, 10)) {
         this.$store.commit('APPEND_RUN_ACTION', { productId: this.selectedProduct.id });
         this.$router.push({ name:'Detail', params: { type: 'Use' } });
       } else {

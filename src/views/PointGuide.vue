@@ -1,7 +1,7 @@
 <template>
   <div class="orderGuide">
     <div class="guideImg">
-      <img src="/image/point-guide.png"/>
+      <img src="http://admin.payot-coin.com/kiosk/5.0.0/point-guide.png"/>
     </div>
     <div class="bottomBtns">
       <div class="boldBtn" style="margin-right:10px;" v-ripple @click="$router.replace({ name: 'Home' })">

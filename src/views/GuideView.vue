@@ -1,7 +1,7 @@
 <template>
 	<GuideLayout>
 		<div class="guide-img">
-			<img :src="`/image/${docs[type].image}`">
+			<img :src="`http://admin.payot-coin.com/kiosk/5.0.0/${docs[type].image}`">
 		</div>
 	</GuideLayout>
 </template>

@@ -19,7 +19,7 @@
 					<dl class="price">
 						<dt>결제예정금액</dt>
 						<dd>
-							<strong class="num">{{ inputAmount | numeral(0, 0) }}</strong>
+							<strong class="num">{{ parseInt(inputAmount, 10) | numeral(0, 0) }}</strong>
 							<span>원</span>
 						</dd>
 					</dl>
@@ -60,6 +60,7 @@ export default {
             this.show(false);
           }).catch(() => {
             // console.log(error.message);
+            // this.$emit('onPay', parseInt(this.inputAmount, 10));
             this.show(false);
           });
       } else {

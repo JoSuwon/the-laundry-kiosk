@@ -65,6 +65,11 @@ export default new Vuex.Store({
     SET_MACHINES(state, value) {
       state.machines = value;
     },
+    CLEAR_KIOSK(state) {
+      state.company = {};
+      state.kiosk = {};
+      state.machines = {};
+    },
     SET_USER(state, value) {
       state.user = value;
     },

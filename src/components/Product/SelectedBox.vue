@@ -8,7 +8,7 @@
     <dl class="price">
       <dt>선택한 금액</dt>
       <dd>
-        <span v-if="selectedProduct !== null">{{ selectedProduct.price | numeral(0, 0) }} 원</span>
+        <span v-if="selectedProduct !== null">{{ parseInt(selectedProduct.price, 10) | numeral(0, 0) }} 원</span>
         <span v-if="selectedProduct === null">0 원</span> 
       </dd>
     </dl>

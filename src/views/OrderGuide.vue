@@ -8,7 +8,7 @@
       <div class="guideCheck">
         <h2>꼭! 확인하세요</h2>
         <div class="checkImg">
-          <img src="/image/wash-check.png">
+          <img src="http://admin.payot-coin.com/kiosk/5.0.0/wash-check.png">
         </div>
         <div class="checkText">
           <dl>
@@ -27,7 +27,7 @@
     </v-dialog>
 
     <div class="guideImg">
-      <img src="/image/wash-guide.png" />
+      <img src="http://admin.payot-coin.com/kiosk/5.0.0/wash-guide.png" />
     </div>
     <div class="bottomBtns">
       <div class="boldBtn" style="margin-right:10px;" v-ripple @click="$router.replace({ name: 'Home' })">

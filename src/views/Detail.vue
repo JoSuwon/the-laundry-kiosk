@@ -39,22 +39,22 @@
 				<dd>
           <div class="item last">
             <label>결제 예정금액</label>
-            <span v-if="type === 'Use'">{{ selectedProduct.price | numeral(0, 0) }}원</span>
-            <span v-if="type === 'Charge'">{{ userAction.price | numeral(0, 0) }}원</span>
+            <span v-if="type === 'Use'">{{ parseInt(selectedProduct.price, 10) | numeral(0, 0) }}원</span>
+            <span v-if="type === 'Charge'">{{ parseInt(userAction.price, 10) | numeral(0, 0) }}원</span>
           </div>
 					<div class="item" v-if="type === 'Charge'">
             <label>추가 포인트</label>
-            <span>{{ Math.floor(userAction.price * userAction.rate) | numeral(0, 0) }} P</span>
+            <span>{{ Math.floor(parseInt(userAction.price, 10) * userAction.rate) | numeral(0, 0) }} P</span>
           </div>
           <div class="item" v-if="type === 'Charge'">
             <label>총 지급 포인트</label>
-            <span>{{ Math.floor(userAction.price * (1+userAction.rate)) | numeral(0, 0) }} P</span>
+            <span>{{ Math.floor(parseInt(userAction.price, 10) * (1+userAction.rate)) | numeral(0, 0) }} P</span>
           </div>
 					<div class="divider" />
 					<div class="item">
             <label>결제후 포인트</label>
-            <span v-if="type === 'Use'">{{ user.point - selectedProduct.price | numeral(0, 0) }} P</span>
-            <span v-if="type === 'Charge'">{{ Math.floor(userAction.price * (1+userAction.rate)) + user.point | numeral(0, 0) }} P</span>
+            <span v-if="type === 'Use'">{{ (parseInt(user.point, 10) - parseInt(selectedProduct.price, 10)) | numeral(0, 0) }} P</span>
+            <span v-if="type === 'Charge'">{{ Math.floor(parseInt(userAction.price, 10) * (1+userAction.rate)) + user.point | numeral(0, 0) }} P</span>
           </div>
         </dd>
       </dl>

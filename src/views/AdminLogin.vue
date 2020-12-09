@@ -95,6 +95,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$store.commit('CLEAR_KIOSK');
+  },
   methods: {
     ...mapMutations({
       setKiosk: 'SET_KIOSK',
