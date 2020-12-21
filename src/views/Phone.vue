@@ -1,5 +1,6 @@
 <template>
   <DefaultLayout
+    ref="defaultLayout"
     @done="nextStep"
   >
     <div class="userLogin">
@@ -64,6 +65,13 @@ export default {
         else if(this.type === 'update') this.updatePassword();
       }
     },
+    phone(newValue) {
+      if(newValue.length === 13) {
+        this.$refs.defaultLayout.setNext(true);
+      } else {
+        this.$refs.defaultLayout.setNext(false);
+      }
+    }
   },
   computed: {
     ...mapState({

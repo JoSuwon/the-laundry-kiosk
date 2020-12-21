@@ -22,8 +22,12 @@
           <v-icon>mdi-chevron-left</v-icon>
           <span>뒤로</span>
         </div>
-        <div class="boldBtn" style="margin-left:10px;" v-ripple @click="$emit('done')">
-          <span>다음</span>
+        <div class="boldBtn" :class="{ nextBtn: nextActive }" style="margin-left:10px;" v-ripple @click="$emit('done')">
+          <svg v-if="nextActive">
+            <rect v-if="nextActive"></rect>
+          </svg>
+          <span v-if="$route.name === 'Detail'">결제진행</span>
+          <span v-if="$route.name !== 'Detail'">다음</span>
           <v-icon>mdi-chevron-right</v-icon>
         </div>
       </div>
@@ -39,6 +43,11 @@ import { mapState } from 'vuex';
 // import WavesBlue from '@/components/WavesBlue.vue';
 export default {
   name: 'DefaultLayout',
+  data() {
+    return {
+      nextActive: false,
+    };
+  },
   components: {
     Waves,
     // WavesBlue,
@@ -56,6 +65,9 @@ export default {
       } else {
         this.$router.go(-1);
       }
+    },
+    setNext(value) {
+      this.nextActive = value;
     },
   },
 };
@@ -129,6 +141,7 @@ export default {
   z-index: 99;
   display: Flex;
   padding: 60px 0;
+
   .boldBtn {
     display: flex;
     align-items: center;
@@ -148,6 +161,52 @@ export default {
     .v-icon {
       font-size: 42px;
     }
+  }
+
+  // .nextBtn{
+  //   animation: pointBtn .7s infinite; 
+  // }
+
+  // @keyframes pointBtn {
+  //   0%{border:3px solid #e2e2e2}
+  //   50%{border:3px solid rgba(255, 0, 170, 1)}
+  //   100%{border:3px solid #e2e2e2}
+  // }
+  .nextBtn{
+    position: relative;
+
+    svg{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      fill: transparent;
+    }
+
+    rect{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      stroke:#ff0080;
+      stroke-width: 6;
+      fill: transparent;
+      animation: nextBtn-ani 3s linear infinite ;
+    }
+
+    @keyframes nextBtn-ani {
+      0%{
+        stroke-dasharray: 220 100%;
+        stroke-dashoffset: 40;
+      }
+
+      100%{
+        stroke-dasharray: 220 100%;
+        stroke-dashoffset: 600;
+      }
+    } 
   }
 }
 </style>

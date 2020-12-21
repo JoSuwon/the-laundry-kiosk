@@ -1,5 +1,5 @@
 <template>
-  <DefaultLayout @done="nextStep">
+  <DefaultLayout ref="defaultLayout" @done="nextStep">
     <div class="detailView">
       <dl>
         <dt>회원정보</dt>
@@ -113,6 +113,9 @@ export default {
     return {
       errorMsg: '',
     };
+  },
+  mounted() {
+    this.$refs.defaultLayout.setNext(true);
   },
   computed: {
     ...mapState({
@@ -239,8 +242,6 @@ export default {
         label {
           font-size: 30px;
           color: #888;
-        }
-        span {
         }
       }
 

@@ -112,7 +112,7 @@ export default {
 
     dd{
       overflow-y:scroll;
-      padding:15px;
+      padding:10px;
       &::-webkit-scrollbar {
         width: 10px;
         height: 10px;
@@ -133,8 +133,8 @@ export default {
         display:flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom:15px;
-        padding:15px;
+        margin-bottom:10px;
+        padding:10px;
         border-radius:15px;
         border:3px solid #e2e2e2;
         background: rgb(194,194,194);
@@ -184,7 +184,7 @@ export default {
 
     dd{
       overflow-y:scroll;
-      padding:15px;
+      padding:10px;
 
       &::-webkit-scrollbar {
         width: 10px;
@@ -203,7 +203,7 @@ export default {
       }
 
       .item{
-        padding:15px;
+        padding:10px;
         text-align:left;
         display:flex;
         align-items: flex-start;

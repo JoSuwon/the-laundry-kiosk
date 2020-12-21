@@ -1,5 +1,6 @@
 <template>
   <DefaultLayout
+    ref="defaultLayout"
     @done="nextStep"
   >
     <UserState />
@@ -45,6 +46,15 @@ export default {
       selectedMachine: null,
       selectedProduct: null,
     };
+  },
+  watch: {
+    selectedProduct(newValue) {
+      if(newValue) {
+        this.$refs.defaultLayout.setNext(true);
+      } else {
+        this.$refs.defaultLayout.setNext(false);
+      }
+    }
   },
   computed: {
     ...mapState({

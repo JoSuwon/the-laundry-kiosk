@@ -2,7 +2,7 @@ import { ipcMain } from 'electron';
 import mqtt from 'mqtt';
 
 const URL = 'mqtt://13.209.63.212:1883';
-const client = mqtt.connect(URL);
+export const client = mqtt.connect(URL);
 let eventer;
 
 ipcMain.handle('login', (event, id) => {
@@ -12,7 +12,7 @@ ipcMain.handle('login', (event, id) => {
   client.subscribe(topic);
 });
 
-client.on('message', (topic) => {
-  // console.log(topic, message.toString());
+client.on('message', (topic, message) => {
+  console.log(topic, message.toString());
   eventer.sender.send('hook', { topic });
 });

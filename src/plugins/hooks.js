@@ -15,7 +15,7 @@ function subscribe() {
 
 ipcRenderer.on('hook', (event, { topic }) => {
   const [, , , action] = topic.split('/');
-  console.log(action);
+  // console.log(action);
   switch (action) {
     case 'shutdown':
       // 키오스크 PC 종료

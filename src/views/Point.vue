@@ -1,5 +1,6 @@
 <template>
   <DefaultLayout
+    ref="defaultLayout"
     @done="nextStep"
   >
     <div class="myState">
@@ -59,6 +60,15 @@ export default {
       focusItemIndex: -1,
       chargeItem: [1000, 2000, 5000, 10000, 20000, 30000, 40000, 50000],
     };
+  },
+  watch: {
+    focusItemIndex(newValue) {
+      if(newValue !== -1) {
+        this.$refs.defaultLayout.setNext(true);
+      } else {
+        this.$refs.defaultLayout.setNext(false);
+      }
+    }
   },
   computed: {
     ...mapState({

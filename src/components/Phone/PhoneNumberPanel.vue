@@ -8,7 +8,8 @@
         </div>
         <div class="divider" />
         <div class="number">
-          {{ phoneNumber }}
+          <!-- {{ phoneNumber }} -->
+          {{ phoneView }}
         </div>
       </div>
       <div class="box numberPad">
@@ -46,10 +47,12 @@ export default {
         [4, 5, 6],
         [7, 8, 9],
       ],
+      phoneView: '010',
+      lastInputTime: new Date().getTime(),
     };
   },
   computed: {
-    phoneNumber(){
+    phoneNumber() {
       const firstNumber = this.phone.slice(0, 3);
       const middleNumber = this.phone.slice(3, 7);
       const lastNumber = this.phone.slice(7, 11);
@@ -61,6 +64,21 @@ export default {
   },
   watch:{
     phoneNumber(newValue){
+      let nowLen = newValue.length;
+      if(nowLen <= 3) {
+        this.phoneView = '010';
+      } else if(nowLen <= 8) {
+        this.phoneView = '010-';
+        for(let i=0; i<nowLen-5; i++) this.phoneView += '*';
+        this.phoneView += newValue[newValue.length-1];
+      } else {
+        this.phoneView = '010-****-';
+        for(let i=0; i<nowLen-10; i++) this.phoneView += '*';
+        this.phoneView += newValue[newValue.length-1];
+      }
+      this.lastInputTime = new Date().getTime();
+      setTimeout(this.replaceLastChar, 1100);
+      
       this.$emit('phone', newValue);
     },
   },
@@ -69,6 +87,13 @@ export default {
       if(key === 'clear') this.phone = '010';
       else if(key === 'delete' && this.phone.length > 3)  this.phone = this.phone.slice(0, this.phone.length - 1);
       else if(typeof key === 'number' && this.phone.length < 11) this.phone += key;
+    },
+    replaceLastChar() {
+      if(this.lastInputTime + 1000 < new Date().getTime()) {
+        if(this.phoneView.length > 3) {
+          this.phoneView = this.phoneView.substr(0, this.phoneView.length-1) + '*';
+        }
+      }
     },
   },
 }

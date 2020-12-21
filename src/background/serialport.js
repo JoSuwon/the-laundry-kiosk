@@ -2,6 +2,7 @@ import { ipcMain } from 'electron';
 import SerialPort from 'serialport';
 import { merge, Subject } from 'rxjs';
 import { buffer, debounceTime, filter, map, throttleTime, timestamp } from 'rxjs/operators';
+import { client } from './mqtt';
 
 const parser = new SerialPort.parsers.Readline({ delimiter: '\r\n' });
 let eventer; // ipcRenderer로 메시지 보내기
@@ -19,6 +20,7 @@ SerialPort.list()
   });
 
 parser.on('data', data => {
+  client.publish('kiosk/1/log/cash', data);
   const [cmd, message] = data
     .toString()
     .trim()

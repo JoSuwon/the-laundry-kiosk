@@ -3,6 +3,7 @@
         v-model="visible"
         width="60%"
         overlay-opacity="0.6"
+        persistent
     >
         <div class="loading">
             <v-progress-circular
