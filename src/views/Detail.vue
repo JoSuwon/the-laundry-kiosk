@@ -189,7 +189,7 @@ export default {
           const point = res.data.point;
           // this.appendUser({ point: parseInt(point) });
           this.appendUser({ point });
-          this.$refs.progressModal.show(false);
+          // this.$refs.progressModal.show(false);
           this.$router.push({ name: 'Finish', params: { type: this.type } });
         })
         .catch(error => {
@@ -197,15 +197,18 @@ export default {
           // 406 = 장비통신불가능
           // 401 = 회원의포인트가 부족
           if (error.response.status === 401) {
-            this.$refs.progressModal.show(false);
+            // this.$refs.progressModal.show(false);
             this.errorMsg = '보유하신 포인트가 부족합니다';
             this.$refs.errorModal.show(true);
           } else {
             // console.log(error.response);
-            this.$refs.progressModal.show(false);
+            // this.$refs.progressModal.show(false);
             this.errorMsg = '장비와의 통신이 원활하지 않습니다';
             this.$refs.errorModal.show(true);
           }
+        })
+        .finally(() => {
+          this.$refs.progressModal.show(false);
         });
       // console.log('res', res);
       // if(res.status === 200) {
