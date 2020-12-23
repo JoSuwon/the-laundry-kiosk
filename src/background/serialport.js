@@ -8,6 +8,7 @@ const parser = new SerialPort.parsers.Readline({ delimiter: '\r\n' });
 let eventer; // ipcRenderer로 메시지 보내기
 let sender; // (message) => {} serial 메시지 보내기
 
+const serialCommunication = new Subject('');
 const inputEvent = new Subject(0);
 
 SerialPort.list()
@@ -20,11 +21,13 @@ SerialPort.list()
   });
 
 parser.on('data', data => {
-  client.publish('kiosk/1/log/cash', data);
+  // client.publish('kiosk/1/log/cash', data);
   const [cmd, message] = data
     .toString()
     .trim()
     .split(':');
+
+  serialCommunication.next(data.toString());
 
   if (cmd !== 'BILL' || !eventer) return;
   // console.log(data);
@@ -32,11 +35,18 @@ parser.on('data', data => {
 });
 
 ipcMain.handle('cash-open', (event, isOpen) => {
-  // console.log('handle cash-open');
   eventer = event;
   const command = isOpen ? 'RUN' : 'STOP';
   sender(command);
 });
+
+serialCommunication.pipe(
+  filter(str => ['RUN:OK', 'STOP:OK'].includes(str)),
+  map(str => str === 'RUN:OK'),
+).subscribe(
+  state => { eventer.sender.send('cash-machine-input-mode', state); },
+  err => { }
+);
 
 /** 1000원 또는 5000원 투입시 */
 const inputOther = inputEvent.pipe(

@@ -50,10 +50,12 @@ export default {
     };
   },
   watch: {
-    visible(newValue) {
+    async visible(newValue) {
       if(newValue) {
+        await this.delay(2000);
         this.count = 60;
         this.timer = setInterval(() => { this.count--; }, 1000);
+        console.log('card-pay');
         ipcRenderer.invoke('card-pay', null, this.inputAmount)
           .then(value => {
             this.$emit('onPay', parseInt(value, 10));
@@ -75,6 +77,11 @@ export default {
     }
   },
   mixins: [ModalMixin],
+  methods: {
+    delay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+  }
 }
 </script>
 

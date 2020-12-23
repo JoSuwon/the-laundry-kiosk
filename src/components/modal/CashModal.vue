@@ -1,50 +1,47 @@
 <template>
-  <v-dialog
-    v-model="visible"
-    fullscreen
-    transition="slide-x-transition"
-  >
-		<div class="fullDialog">
-			<div class="creditModal">
-				<div class="title">
-					<h2>현금결제</h2>
-					<p>※ 보안을 위해 60초 후 자동으로 로그아웃 됩니다.</p>
-				</div>
-				<div class="guide-image">
-					<img src="@/assets/img/cash-animation.gif" />
-					<!-- card-animation.gif -->
-				</div>
-				<div class="info-detail">
-					<p>현금결제기에 현금을 투입해주세요</p>
-					<dl class="price">
-						<dt>결제예정금액</dt>
-						<dd>
-							<strong class="num">{{ parseInt(inputAmount, 10) | numeral('0,0') }}</strong>
-							<span>원</span>
-						</dd>
-					</dl>
-					<dl class="push_price">
-						<dt>삽입된 금액</dt>
-						<dd>
-							<strong class="num">{{ parseInt(currentMoney, 10) | numeral('0,0') }}</strong>
-							<span>원</span>
-						</dd>
-					</dl>
-				</div>
-				<div class="divider" />
-				<div class="guideText">
-					<v-icon color="#fff000" size="80">mdi-exclamation-thick</v-icon>
-					<span>현금충전시 잔액이 반환되지 않습니다.
-투입한 금액이 전액 충전되니 주의 바랍니다.</span>
-				</div>
-				<div class="counter">
-					<span>{{ count }}</span>
-				</div>
-				<div class="btns">
-					<v-btn text @click="closeModal">취소</v-btn>
-				</div>
-			</div>
-		</div>
+  <v-dialog v-model="visible" fullscreen transition="slide-x-transition">
+    <div class="fullDialog">
+      <div class="creditModal">
+        <div class="title">
+          <h2>현금결제</h2>
+          <p>※ 보안을 위해 60초 후 자동으로 로그아웃 됩니다.</p>
+        </div>
+        <div class="guide-image">
+          <img src="@/assets/img/cash-animation.gif" />
+          <!-- card-animation.gif -->
+        </div>
+        <div class="info-detail">
+          <p>현금결제기에 현금을 투입해주세요</p>
+          <dl class="price">
+            <dt>결제예정금액</dt>
+            <dd>
+              <strong class="num">{{ parseInt(inputAmount, 10) | numeral('0,0') }}</strong>
+              <span>원</span>
+            </dd>
+          </dl>
+          <dl class="push_price">
+            <dt>삽입된 금액</dt>
+            <dd>
+              <strong class="num">{{ parseInt(currentMoney, 10) | numeral('0,0') }}</strong>
+              <span>원</span>
+            </dd>
+          </dl>
+        </div>
+        <div class="divider" />
+        <div class="guideText">
+          <v-icon color="#fff000" size="80">mdi-exclamation-thick</v-icon>
+          <span
+            >현금충전시 잔액이 반환되지 않습니다. 투입한 금액이 전액 충전되니 주의 바랍니다.</span
+          >
+        </div>
+        <div class="counter">
+          <span :class="{ open: isOpen }">{{ count }}</span>
+        </div>
+        <div class="btns">
+          <v-btn text @click="closeModal">취소</v-btn>
+        </div>
+      </div>
+    </div>
 
     <!-- credit-modal -->
   </v-dialog>
@@ -65,6 +62,8 @@ export default {
       currentMoney: 0,
       count: 60,
       timer: null,
+      isOpen: false,
+      openEvent: {},
     };
   },
   watch: {
@@ -99,6 +98,7 @@ export default {
   },
   mounted() {
     ipcRenderer.on('cash-input', this.onInputEvent);
+    ipcRenderer.on('cash-machine-input-mode', this.onCashInputModeChage);
   },
   methods: {
     closeModal() {
@@ -111,61 +111,63 @@ export default {
       this.$emit('onPay', newValue);
       this.show(false);
     }, 2000),
+    onCashInputModeChage(event, state) {
+      this.isOpen = state;
+    }
   },
   beforeDestroy() {
     ipcRenderer.invoke('cash-open', false);
     ipcRenderer.removeListener('cash-input', this.onInputEvent);
+    ipcRenderer.removeListener('cash-machine-input-mode', this.onCashInputModeChage);
   },
   mixins: [ModalMixin],
 }
 </script>
 
 <style lang="scss" scoped>
-
-.fullDialog{
-	display:flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width:100%;
-	height:100%;
-	background:rgba(0,0,0,0.8);
+.fullDialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .creditModal {
   position: relative;
   font-size: 36px;
   font-family: 'NotoSansKR';
-	letter-spacing: -0.7px;
-	color:#fff;
-	max-width:700px;
-	
-	.title{
-		display:flex;
-		align-items: center;
-		margin-bottom:30px;
-		
-		h2{
-			font-size:54px;
-			line-height:54px;
-			font-weight:500;
-			font-family:'NotoSansKR';
-		}
-		p{
-			flex:1;
-			margin:0px;
-			margin-left:45px;
-			font-size:32px;
-			font-family:'NotoSansKR';
-			word-break: keep-all;
-			line-height:42px;
-			
-		}
-	}
+  letter-spacing: -0.7px;
+  color: #fff;
+  max-width: 700px;
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 54px;
+      line-height: 54px;
+      font-weight: 500;
+      font-family: 'NotoSansKR';
+    }
+    p {
+      flex: 1;
+      margin: 0px;
+      margin-left: 45px;
+      font-size: 32px;
+      font-family: 'NotoSansKR';
+      word-break: keep-all;
+      line-height: 42px;
+    }
+  }
 
   .guide-image {
     background: #fff;
-		border: 3px solid #e2e2e2;
+    border: 3px solid #e2e2e2;
     min-height: 560px;
     margin-bottom: 45px;
     border-radius: 15px;
@@ -188,7 +190,7 @@ export default {
       padding: 10px 20px;
       margin-bottom: 30px;
       font-size: 33px;
-			border-radius: 15px;
+      border-radius: 15px;
     }
 
     dl {
@@ -201,7 +203,7 @@ export default {
         color: #fff;
       }
       dd {
-				font-size:36px;
+        font-size: 36px;
         strong {
           margin-right: 15px;
         }
@@ -221,29 +223,28 @@ export default {
   }
 
   .divider {
-		height: 3px;
-		background:#fff;
+    height: 3px;
+    background: #fff;
     margin: 45px 0;
   }
 
   .guideText {
-		display:flex;
-		align-items: center;
-		background:rgba(0,0,0,0.8);
-		border-radius:15px;
-		padding:15px;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 15px;
 
-		.v-icon{
-			margin-right:30px;
-		}
-		span{
-			flex:1;
-			color:#ff0000;
-			font-weight:500;
-			word-break: keep-all;
-			letter-spacing: -1px;
-		}
-
+    .v-icon {
+      margin-right: 30px;
+    }
+    span {
+      flex: 1;
+      color: #ff0000;
+      font-weight: 500;
+      word-break: keep-all;
+      letter-spacing: -1px;
+    }
   }
 
   .counter {
@@ -258,24 +259,28 @@ export default {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-			background: #fff;
-			color: #292929;
+      background: #fff;
+      // color: #292929;
+      color: #ff0000;
       font-size: 56px;
       font-weight: 600;
     }
-	}
-	.btns{
-		text-align:center;
-		.v-btn{
-			margin-top:90px;
-			width:350px;
-			font-size:36px;
-			min-height:100px;
-			border-radius:15px;
-			background: rgb(194,194,194);
-			background: linear-gradient(0deg, rgba(194,194,194,1) 0%, rgba(255,255,255,1) 100%);
-			box-shadow: 10px 10px 20px rgba(0,158,230,0.6);
-		}
-	}
+    span.open {
+      color: #292929;
+    }
+  }
+  .btns {
+    text-align: center;
+    .v-btn {
+      margin-top: 90px;
+      width: 350px;
+      font-size: 36px;
+      min-height: 100px;
+      border-radius: 15px;
+      background: rgb(194, 194, 194);
+      background: linear-gradient(0deg, rgba(194, 194, 194, 1) 0%, rgba(255, 255, 255, 1) 100%);
+      box-shadow: 10px 10px 20px rgba(0, 158, 230, 0.6);
+    }
+  }
 }
 </style>
