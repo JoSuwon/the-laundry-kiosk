@@ -67,6 +67,13 @@ export default {
   watch: {
     async visible(newValue) {
       if(newValue) {
+        if(new Date().getHours() === 0) {
+          this.errorMsg = '카드결제 점검 시간 입니다(00:00~00:59)';
+          this.$refs.errorModal.show(true);
+          this.show(false);
+          return;
+        }
+
         await this.delay(2000);
         // this.count = 60;
         // this.timer = setInterval(() => { this.count--; }, 1000);
