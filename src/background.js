@@ -10,6 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 import './background/serialport';
 import './background/mqtt';
 import './background/koces';
+import './background/kicc';
 
 let window;
 
@@ -73,6 +74,10 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+app.on('browser-window-blur', () => {
+  app.focus();
 });
 
 app.on("activate", () => {

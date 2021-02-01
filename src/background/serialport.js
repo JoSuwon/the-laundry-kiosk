@@ -17,16 +17,30 @@ SerialPort.list()
   .then(path => new SerialPort(path, { autoOpen: true, baudRate: 9600 }))
   .then(port => {
     port.pipe(parser);
+    
     sender = message => port.write(`${message}\r\n`);
+    port.on('open', async () => {
+      for(let i=0; i<5; i++) {
+        await checksumParser();
+      }
+    })
   });
 
+async function checksumParser() {
+  await delay(2000);
+  sender('STAT');
+}
+
+function delay(millisec) {
+  return new Promise(resolve => setTimeout(resolve, millisec));
+}
+
 parser.on('data', data => {
-  // client.publish('kiosk/1/log/cash', data);
   const [cmd, message] = data
     .toString()
     .trim()
     .split(':');
-
+  
   serialCommunication.next(data.toString());
 
   if (cmd !== 'BILL' || !eventer) return;

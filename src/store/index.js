@@ -32,6 +32,9 @@ export default new Vuex.Store({
     user: {},
     userAction: generateDefaultAction(null, null), // companyId, phone, method(card, cash), rate, price
     runAction: generateDefaultRunAction(null, null),
+    cardModule: {
+      type: null,
+    },
   },
   // getters: {
   //   getProudctInfo: (state) => (serviceId) => {
@@ -69,6 +72,7 @@ export default new Vuex.Store({
       state.company = {};
       state.kiosk = {};
       state.machines = {};
+      state.cardModule.type = null;
     },
     SET_USER(state, value) {
       state.user = value;
@@ -86,6 +90,9 @@ export default new Vuex.Store({
     },
     APPEND_RUN_ACTION(state, value) {
       state.runAction = Object.assign({}, state.runAction, value);
+    },
+    SET_CARD_MODULE(state, value) {
+      state.cardModule.type = value;
     },
   },
   actions: {

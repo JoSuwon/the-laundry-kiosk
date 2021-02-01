@@ -7,6 +7,9 @@
 			<div class="shopNumber">
 				{{ company.tel }}
 			</div>
+			<div class="cardModule">
+				{{ cardModule }}
+			</div>
 		</div>
 		<div class="time">
 			{{ now | moment('HH:mm') }}
@@ -27,11 +30,14 @@ export default {
   mounted() {
     this.timeListener = setInterval(() => {
       this.now = Date.now();
-    }, 1000);
+    }, 60000);
   },
   computed: {
     ...mapState({
-      company: state => state.company,
+			company: state => state.company,
+			cardModule: state => {
+				return state.cardModule?.type ? state.cardModule.type.toUpperCase() : '';
+			}
     }),
   },
   beforeDestroy() {
@@ -57,6 +63,7 @@ export default {
 	.shop{
 		display:flex;
 		.shopName{margin-right:30px;}
+		.shopNumber{margin-right:30px;}
 	}
 }
 </style>

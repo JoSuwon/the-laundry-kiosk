@@ -11,6 +11,7 @@ import './plugins/network_event';
 import './plugins/sound';
 import './plugins/hooks';
 
+
 Vue.config.productionTip = false;
 
 new Vue({

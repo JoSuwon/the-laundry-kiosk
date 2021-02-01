@@ -3,7 +3,10 @@ import { takeRight, take } from 'lodash';
 import edge from 'electron-edge-js';
 
 const path = 'C:\\Koces\\PayotKoces.dll';
-const lib = edge.func(path);
+let lib;
+if(process.arch === 'ia32') {
+  lib = edge.func(path);
+}
 
 function request(params) {
   return new Promise((resolve, reject) => {
@@ -59,6 +62,6 @@ async function payment(companyName, amount) {
   return amount;
 }
 
-ipcMain.handle('card-pay', async (event, companyName, amount) => {
+ipcMain.handle('card-pay-koces', async (event, companyName, amount) => {
   return await payment(companyName, amount);
 });

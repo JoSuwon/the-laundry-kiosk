@@ -10,21 +10,21 @@
         <dl class="item">
           <dt>아이디</dt>
           <dd>
-            <input type="text" v-model="email" @keydown.enter="adminLogin" />
+            <input type="text" v-model="email" />
           </dd>
         </dl>
 
         <dl class="item">
           <dt>비밀번호</dt>
           <dd>
-            <input type="password" v-model="password" @keydown.enter="adminLogin" />
+            <input type="password" v-model="password" />
           </dd>
         </dl>
 
         <dl class="item leftText">
           <dt>현금적립률</dt>
           <dd>
-            <input type="number" v-model.number="eventRate.cash" @keydown.enter="adminLogin"/>
+            <input type="number" v-model.number="eventRate.cash" />
           </dd>
           <dd class="text">
             <span>%</span>
@@ -33,7 +33,7 @@
         <dl class="item leftText">
           <dt>카드적립률</dt>
           <dd>
-            <input type="number" v-model.number="eventRate.card" @keydown.enter="adminLogin"/>
+            <input type="number" v-model.number="eventRate.card" />
           </dd>
           <dd class="text">
             <span>%</span>
@@ -49,9 +49,14 @@
           </ul>
         </div>
 
-        <v-btn text @click="adminLogin">
-          로그인
-        </v-btn>
+        <div class="loginBtns">
+          <v-btn text @click="adminLogin('koces')">
+            KOCES 로그인(32BIT)
+          </v-btn>
+          <v-btn text @click="adminLogin('kicc')">
+            KICC 로그인
+          </v-btn>
+        </div>
       </div>
     </div>
     <ErrorModal
@@ -101,6 +106,7 @@ export default {
   methods: {
     ...mapMutations({
       setKiosk: 'SET_KIOSK',
+      setCardModule: 'SET_CARD_MODULE',
     }),
     ...mapActions({
       accountLogin: 'accountLogin',
@@ -108,7 +114,12 @@ export default {
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
-    async adminLogin() {
+    async adminLogin(cardModule) {
+      if(cardModule === 'koces' && process.arch !== 'ia32') {
+        this.errorMsg = 'KOCES는 32비트 전용 입니다';
+        this.$refs.errorModal.show(true);
+        return;
+      }
       if(this.email.length === 0) {
         this.errorMsg = '이메일을 입력해주세요';
       } else if(this.password.length === 0) {
@@ -126,6 +137,7 @@ export default {
         this.setKiosk({ EventRate: this.eventRate, Options: this.options });
         this.accountLogin({ email: this.email, password: this.password })
           .then(() => {
+            this.setCardModule(cardModule);
             this.$refs.progressModal.show(false);
             this.$router.push({ name: 'Home' });
           })
@@ -216,13 +228,17 @@ export default {
       }
     }
 
-    .v-btn {
-      height: 120px;
-      background: #292929;
-      color: #fff;
-      font-size: 36px;
-      width: 100%;
-      border-radius: 15px;
+    .loginBtns {
+      display: flex;
+      justify-content: space-between;
+      .v-btn {
+        height: 120px;
+        background: #292929;
+        color: #fff;
+        font-size: 34px;
+        width: 48%;
+        border-radius: 15px;
+      }
     }
 
     .option {

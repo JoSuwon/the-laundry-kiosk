@@ -1,45 +1,54 @@
 <template>
-  <v-dialog
-    v-model="visible"
-    fullscreen
-    transition="slide-x-transition"
-  >
-		<div class="fullDialog">
-			<div class="creditModal">
-				<div class="title">
-					<h2>카드결제</h2>
-					<p>※ 보안을 위해 60초 후 자동으로 로그아웃 됩니다.</p>
-				</div>
-				<div class="guide-image">
-					<img src="@/assets/img/card-animation.gif" />
-					<!-- card-animation.gif -->
-				</div>
-				<div class="info-detail">
-					<p>카드를 카드결제기에 투입해주세요</p>
-					<dl class="price">
-						<dt>결제예정금액</dt>
-						<dd>
-							<strong class="num">{{ parseInt(inputAmount, 10) | numeral('0,0') }}</strong>
-							<span>원</span>
-						</dd>
-					</dl>
-				</div>
-				<div class="counter">
-					<span>{{ count }}</span>
-				</div>
-			</div>
-		</div>
+  <div>
+    <v-dialog
+      v-model="visible"
+      fullscreen
+      transition="slide-x-transition"
+    >
+      <div class="fullDialog">
+        <div class="creditModal">
+          <div class="title">
+            <h2>카드결제</h2>
+            <!-- <p>※ 보안을 위해 60초 후 자동으로 로그아웃 됩니다.</p> -->
+          </div>
+          <div class="guide-image">
+            <img src="@/assets/img/card-animation.gif" />
+            <!-- card-animation.gif -->
+          </div>
+          <div class="info-detail">
+            <p>카드를 카드결제기에 투입해주세요</p>
+            <dl class="price">
+              <dt>결제예정금액</dt>
+              <dd>
+                <strong class="num">{{ parseInt(inputAmount, 10) | numeral('0,0') }}</strong>
+                <span>원</span>
+              </dd>
+            </dl>
+          </div>
+          <div class="counter">
+            <!-- <span>{{ count }}</span> -->
+          </div>
+        </div>
+      </div>
 
-    <!-- credit-modal -->
-  </v-dialog>
+      <!-- credit-modal -->
+    </v-dialog>
+    <ErrorModal ref="errorModal" :message="errorMsg" />
+  </div>
 </template>
 
 <script>
 import ModalMixin from '@/mixins/modal';
 import { ipcRenderer } from 'electron';
 
+import ErrorModal from '@/components/modal/ErrorModal';
+import { mapState } from 'vuex';
+
 export default {
   name: 'CardModal',
+  components: {
+    ErrorModal,
+  },
   props: {
     inputAmount: Number,
   },
@@ -47,24 +56,35 @@ export default {
     return {
       count: 60,
       timer: null,
+      errorMsg: '',
     };
+  },
+  computed: {
+    ...mapState({
+      cardModule: state => state.cardModule.type,
+    }),
   },
   watch: {
     async visible(newValue) {
       if(newValue) {
         await this.delay(2000);
-        this.count = 60;
-        this.timer = setInterval(() => { this.count--; }, 1000);
-        console.log('card-pay');
-        ipcRenderer.invoke('card-pay', null, this.inputAmount)
-          .then(value => {
-            this.$emit('onPay', parseInt(value, 10));
-            this.show(false);
-          }).catch(() => {
-            // console.log(error.message);
-            // this.$emit('onPay', parseInt(this.inputAmount, 10));
-            this.show(false);
-          });
+        // this.count = 60;
+        // this.timer = setInterval(() => { this.count--; }, 1000);
+        if(this.cardModule === 'kicc' || this.cardModule === 'koces') {
+          ipcRenderer.invoke(`card-pay-${this.cardModule}`, null, this.inputAmount)
+            .then(value => {
+              this.$emit('onPay', parseInt(value, 10));
+              this.show(false);
+            }).catch((error) => {
+              this.errorMsg = error.message.substr(error.message.lastIndexOf(':') + 1);
+              this.$refs.errorModal.show(true);
+              this.show(false);
+            });
+        } else {
+          this.errorMsg = '카드모듈이 선택되어있지 않습니다';
+          this.$refs.errorModal.show(true);
+          this.show(false);
+        }
       } else {
         clearInterval(this.timer);
       }
@@ -99,6 +119,7 @@ export default {
 
 .creditModal {
   position: relative;
+  width: 700px;
   font-size: 36px;
   font-family: 'NotoSansKR';
 	letter-spacing: -0.7px;
@@ -109,6 +130,7 @@ export default {
 		display:flex;
 		align-items: center;
 		margin-bottom:30px;
+    justify-content: center;
 		
 		h2{
 			font-size:54px;
