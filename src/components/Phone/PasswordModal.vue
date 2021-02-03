@@ -125,19 +125,19 @@ export default {
     // 비밀번호 확인 #1f9103
 
     .check-pass {
-      background: #00a0e9;
+      background: #B12725;
     }
     .register-pass {
-      background: #431cb3;
+      background: #da2a24;
     }
     .repeat-pass {
-      background: #1f9103;
+      background: #FF776E;
     }
     .check-temp-pass {
-      background: #960c13;
+      background: #da2a24;
     }
     .update-pass {
-      background: #ed1c24;
+      background: #FF776E;
     }
 
     .pad-header {

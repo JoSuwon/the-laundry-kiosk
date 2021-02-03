@@ -41,7 +41,7 @@
 				</v-col>
 			</v-row>
 			<div class="logo">
-				<img src="@/assets/img/logo_b.png">
+				<img src="@/assets/img/the_logo_b.png">
 			</div>
 		</div>
 		<Waves />
@@ -165,7 +165,7 @@ export default {
 		}
 		dd{
 			font-size:36px;
-			color:#00a0e9;
+			color:#c4342c;
 		}
 	}
 
@@ -178,7 +178,7 @@ export default {
 			letter-spacing:-0.7px;
 			border:2px solid #c2c2c2;
 			border-radius:15px;
-			box-shadow: 8px 8px 15px rgba(0,158,230,0.6);
+			box-shadow: 8px 8px 15px rgba(177, 38, 36, 0.6);
 			background: rgb(194,194,194);
 			background: linear-gradient(0deg, rgba(194,194,194,1) 0%, rgba(255,255,255,1) 100%);
 		}
@@ -198,7 +198,7 @@ export default {
 	left:0px;
 	
 	img{
-		height:50px;
+		height:75px;
 	}
 }
 

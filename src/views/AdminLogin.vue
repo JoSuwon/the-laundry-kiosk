@@ -45,7 +45,7 @@
           <ul>
             <li><input type="checkbox" v-model="options.possibleCard" /><span>카드결제 사용</span></li>
             <li><input type="checkbox" v-model="options.possibleCash" /><span>현금결제 사용</span></li>
-            <li><input type="checkbox" v-model="options.hideNoticePage" /><span>결제 및 사용 안내페이지 숨기기</span></li>
+            <!-- <li><input type="checkbox" v-model="options.hideNoticePage" /><span>결제 및 사용 안내페이지 숨기기</span></li> -->
           </ul>
         </div>
 

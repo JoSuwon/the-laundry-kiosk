@@ -112,7 +112,7 @@ export default {
   }
   .myPoint{
     dd{
-      color:#00a0e9;
+      color:#c4342c;
     }
   }
 }
@@ -137,7 +137,7 @@ export default {
     padding:30px;
     border-radius:15px;
     border:2px solid #c2c2c2;
-    box-shadow: 8px 8px 15px rgba(0,158,230,0.6);
+    box-shadow: 8px 8px 15px rgba(177, 38, 36, 0.6);
     background: rgb(194,194,194);
     background: linear-gradient(0deg, rgba(194,194,194,1) 0%, rgba(255,255,255,1) 100%);
     
@@ -148,7 +148,7 @@ export default {
       font-size:26px;
 
       dt{color:#595959}
-      dd{color:#00a0e9}
+      dd{color:#c4342c}
     }
 
     dl.first{

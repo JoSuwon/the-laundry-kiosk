@@ -216,7 +216,7 @@ export default {
     dl.push_price {
       dd {
         strong {
-          color: #e1137e;
+          color: #d22828;
         }
       }
     }
@@ -261,7 +261,7 @@ export default {
       border-radius: 50%;
       background: #fff;
       // color: #292929;
-      color: #ff0000;
+      color: #d22828;
       font-size: 56px;
       font-weight: 600;
     }
@@ -279,7 +279,7 @@ export default {
       border-radius: 15px;
       background: rgb(194, 194, 194);
       background: linear-gradient(0deg, rgba(194, 194, 194, 1) 0%, rgba(255, 255, 255, 1) 100%);
-      box-shadow: 10px 10px 20px rgba(0, 158, 230, 0.6);
+      box-shadow: 10px 10px 20px rgba(177, 38, 36, 0.6);
     }
   }
 }

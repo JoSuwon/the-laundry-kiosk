@@ -5,7 +5,8 @@
       hide-delimiters
       :show-arrows-on-hover="false"
       :show-arrows="false"
-      :cycle="true"
+      :cycle="false"
+      touchless
       interval="5000"
     >
       <!-- <v-carousel-item>
@@ -15,7 +16,9 @@
         <img src="http://admin.payot-coin.com/kiosk/sb02.png">
       </v-carousel-item> -->
       <v-carousel-item v-for="item in slides" :key="item.id">
-          <img :src="`http://admin.payot-coin.com/kiosk/5.0.0/${item.url}`">
+          <!-- <img :src="`http://admin.payot-coin.com/kiosk/5.0.0/${item.url}`"> -->
+          <!-- <img :src="`http://admin.payot-coin.com/kiosk/zatacso/sb01.png`"> -->
+          <img src="@/assets/img/bg.png" >
       </v-carousel-item>
     </v-carousel>
 
@@ -40,7 +43,7 @@
       </div>
     </div>
     <div class="logo" @click="logoutCount++">
-      <img src="@/assets/img/logo.png">
+      <img src="@/assets/img/the_logo.png">
     </div>
     <WavesBlue />
   </div>
@@ -66,8 +69,8 @@ export default {
         {url:'main-sb-07.png'}
       ],
       action: [
-        { name: 'Phone', redirectRouteName: 'PointGuide', mode: 'Charge' },
-        { name: 'Phone', redirectRouteName: 'OrderGuide', mode: 'Use' },
+        { name: 'Phone', redirectRouteName: 'Point', mode: 'Charge' },
+        { name: 'Phone', redirectRouteName: 'Product', mode: 'Use' },
         { name: 'GuideList', redirectRouteName: null, mode: null },
       ],
       logoutCount: 0,
@@ -173,7 +176,7 @@ export default {
     }
     .join{
       .inner{
-        .v-icon{color:#f55c8a}
+        .v-icon{color:#5F5148}
       }
     }
   }
@@ -185,7 +188,7 @@ export default {
     position:absolute;
     bottom:0px;
     img{
-      height:50px;
+      height:70px;
     }
   }
 }

@@ -14,7 +14,7 @@
     />
     <ConfirmModal
       ref="confirmModal"
-      @confirmOkay="$router.push({ name: 'PointGuide' })"
+      @confirmOkay="$router.push({ name: 'Point' })"
     >
       포인트가 부족합니다.<br>
       충전하시겠습니까?

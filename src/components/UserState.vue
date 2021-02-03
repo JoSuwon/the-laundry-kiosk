@@ -5,7 +5,7 @@
       <span>
         <strong>{{ user.point | numeral('0,0') }}</strong> 포인트
       </span>
-      <v-btn text @click="$router.push('PointGuide')">충전하기</v-btn>
+      <v-btn text @click="$router.push('Point')">충전하기</v-btn>
     </dd>
   </dl>
 </template>

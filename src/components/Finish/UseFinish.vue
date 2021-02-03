@@ -68,14 +68,14 @@ export default {
   }
   dl.eqName {
     dd {
-      background: #a22123;
+      background: #c4342c;
       color: #fff;
       padding: 0 15px;
     }
   }
   dl.bonus {
     dd {
-      color: #a22123;
+      color: #c4342c;
     }
   }
   dl.total {

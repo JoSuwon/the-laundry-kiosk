@@ -33,7 +33,7 @@
           <v-icon>mdi-chevron-left</v-icon>
           <span>로그아웃</span>
         </div>
-        <div class="boldBtn" style="margin-left:10px;" v-ripple @click="$router.push({ name: 'OrderGuide' })">
+        <div class="boldBtn" style="margin-left:10px;" v-ripple @click="$router.push({ name: 'Product' })">
           <span>추가상품 선택하기</span>
           <v-icon>mdi-chevron-right</v-icon>
         </div>
@@ -61,7 +61,7 @@ export default {
 	},
 	data() {
 		return {
-			count: 20,
+			count: 10,
 		};
 	},
 	watch: {
@@ -156,9 +156,15 @@ export default {
 				display: block;
 				font-size: 36px;
 				font-weight: 500;
+				background: rgba(255, 255, 255, 0.8);
+				width: 550px;
+				margin:0 auto;
+				border-radius: 20px;
+
 
 				b {
 					color: #d32078;
+					// color: #ffffff;
 				}
 			}
 			.v-btn {
@@ -201,7 +207,7 @@ export default {
 	  background: rgb(194,194,194);
     background: linear-gradient(0deg, rgba(194,194,194,1) 0%, rgba(255,255,255,1) 100%);
     border-radius:15px;
-    box-shadow: 10px 10px 20px rgba(0,158,230,0.35);
+    box-shadow: 10px 10px 20px rgba(177, 38, 36, 0.35);
 
     span{flex:1;text-align: center;}
     .v-icon{font-size:42px;}

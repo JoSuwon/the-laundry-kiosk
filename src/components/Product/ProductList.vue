@@ -27,7 +27,7 @@
         >
           <div class="itemName">{{ item.name }}</div>
           <div class="itemInfo">
-            <span class="price"><b>{{ parseInt(item.price, 10) | numeral('0,0') }}</b>원</span>
+            <span class="number"><b>{{ parseInt(item.price, 10) | numeral('0,0') }}</b>원</span>
           </div>
         </div>
       </dd>
@@ -168,11 +168,11 @@ export default {
       }
 
       .item.active{ // 기기선택 활성화
-        background:#013a84;
+        background:#d22828;
         color:#fff;
         span{
           background:#fff;
-          color:#013a84
+          color:#d22828
         }
       }
     }
@@ -221,8 +221,14 @@ export default {
         }
       }
       .item.active{
-        border:3px solid #00a0e9;
-        .number{background:#00a0e9;color:#fff;}
+        border:3px solid #d22828;
+        .number{
+          padding-left: 12px;
+          padding-right: 12px;
+          border-radius: 15px;
+          background:#d22828;
+          color:#fff;
+        }
 		  }
     }
   }

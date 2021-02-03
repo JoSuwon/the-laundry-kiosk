@@ -90,7 +90,7 @@ export default {
       left:0;
       width:100%;
       height:100%;
-      stroke:#ff0080;
+      stroke:#d6595b;
       stroke-width: 6;
       fill: transparent;
       animation: nextBtn-ani 3s linear infinite ;

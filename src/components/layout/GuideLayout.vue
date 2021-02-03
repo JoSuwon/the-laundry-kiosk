@@ -60,7 +60,7 @@ export default {
       background: rgb(194,194,194);
       background: linear-gradient(0deg, rgba(194,194,194,1) 0%, rgba(255,255,255,1) 100%);
       border:2px solid #d2d2d2;
-      box-shadow: 10px 10px 20px rgba(0,158,230,0.35);
+      box-shadow: 10px 10px 20px rgba(177, 38, 36, 0.35);
     }
 
     .homeBtn{
