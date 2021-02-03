@@ -50,11 +50,27 @@ const routes = [
     path: '/PointGuide',
     name: 'PointGuide',
     component: PointGuide,
+    beforeEnter: (to, from, next) => {
+      const { hideNoticePage } = store.state.kiosk?.Options;
+      if(hideNoticePage) {
+        next({ name: 'Point' });
+      } else {
+        next();
+      }
+    },
   },
   {
     path: '/OrderGuide',
     name: 'OrderGuide',
     component: OrderGuide,
+    beforeEnter: (to, from, next) => {
+      const { hideNoticePage } = store.state.kiosk?.Options;
+      if(hideNoticePage) {
+        next({ name: 'Product' });
+      } else {
+        next();
+      }
+    },
   },
   {
     path: '/Point',

@@ -61,7 +61,7 @@ export default {
 	},
 	data() {
 		return {
-			count: 20,
+			count: 10,
 		};
 	},
 	watch: {
