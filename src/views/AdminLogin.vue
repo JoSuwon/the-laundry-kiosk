@@ -72,22 +72,22 @@
 
 <script>
 import { remote } from 'electron';
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'AdminLogin',
   data() {
     return {
-      email: '',
+      email: this.$store.state.kioskId,
       password: '',
       eventRate: {
-        cash: 0,
-        card: 0,
+        cash: this.$store.state.kiosk?.EventRate?.cash * 100,
+        card: this.$store.state.kiosk?.EventRate?.card * 100,
       },
       options: {
-        possibleCard: true,
-        possibleCash: true,
-        hideNoticePage: false,
+        possibleCard: this.$store.state.kiosk?.Options?.possibleCard,
+        possibleCash: this.$store.state.kiosk?.Options?.possibleCash,
+        hideNoticePage: this.$store.state.kiosk?.Options?.hideNoticePage,
       },
       errorMsg: '',
       exitCount: 0,
@@ -99,6 +99,11 @@ export default {
         remote.app.exit();
       }
     },
+  },
+  computed: {
+    ...mapState({
+      companyId: state => state.company.id,
+    }),
   },
   mounted() {
     this.$store.commit('CLEAR_KIOSK');
@@ -137,6 +142,7 @@ export default {
         this.setKiosk({ EventRate: this.eventRate, Options: this.options });
         this.accountLogin({ email: this.email, password: this.password })
           .then(() => {
+            this.$store.commit('SET_KIOSK_ID', this.email);
             this.setCardModule(cardModule);
             this.$refs.progressModal.show(false);
             this.$router.push({ name: 'Home' });
