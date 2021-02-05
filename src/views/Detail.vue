@@ -1,5 +1,5 @@
 <template>
-  <DefaultLayout ref="defaultLayout" @done="nextStep">
+  <DefaultLayout ref="defaultLayout" @done="count++;nextStep();">
     <div class="detailView">
       <dl>
         <dt>회원정보</dt>
@@ -112,6 +112,7 @@ export default {
   data() {
     return {
       errorMsg: '',
+      count: 0,
     };
   },
   mounted() {
@@ -156,8 +157,10 @@ export default {
       run: 'runMachine',
     }),
     nextStep() {
-      if (this.type === 'Charge') this.payment();
-      else if (this.type === 'Use') this.runMachine();
+      console.log(this.count);
+      return;
+      // if (this.type === 'Charge') return this.payment();
+      // else if (this.type === 'Use') return this.runMachine();
     },
     payment() {
       // 결제하기

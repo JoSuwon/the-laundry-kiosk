@@ -13,6 +13,6 @@ ipcMain.handle('login', (event, id) => {
 });
 
 client.on('message', (topic, message) => {
-  console.log(topic, message.toString());
+  // console.log(topic, message.toString());
   eventer.sender.send('hook', { topic });
 });

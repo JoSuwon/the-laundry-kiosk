@@ -35,6 +35,7 @@ export default new Vuex.Store({
     cardModule: {
       type: null,
     },
+    kioskId: '',
   },
   // getters: {
   //   getProudctInfo: (state) => (serviceId) => {
@@ -70,7 +71,7 @@ export default new Vuex.Store({
     },
     CLEAR_KIOSK(state) {
       state.company = {};
-      state.kiosk = {};
+      // state.kiosk = {};
       state.machines = {};
       state.cardModule.type = null;
     },
@@ -93,6 +94,9 @@ export default new Vuex.Store({
     },
     SET_CARD_MODULE(state, value) {
       state.cardModule.type = value;
+    },
+    SET_KIOSK_ID(state, value) {
+      state.kioskId = value;
     },
   },
   actions: {
