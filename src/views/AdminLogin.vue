@@ -86,7 +86,7 @@ export default {
       },
       options: {
         possibleCard: this.$store.state.kiosk?.Options?.possibleCard,
-        possibleCash: this.$store.state.kiosk?.Options?.possibleCard,
+        possibleCash: this.$store.state.kiosk?.Options?.possibleCash,
         hideNoticePage: this.$store.state.kiosk?.Options?.hideNoticePage,
       },
       errorMsg: '',
