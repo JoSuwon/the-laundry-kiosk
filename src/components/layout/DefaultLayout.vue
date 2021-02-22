@@ -59,8 +59,7 @@ export default {
   },
   methods: {
     goBack() {
-      if((this.$route.name === 'Point' && this.hideNoticePage) ||
-         (this.$route.name === 'Product' && this.hideNoticePage)) {
+      if(this.$route.name === 'Point' || this.$route.name === 'Product') {
         this.$router.replace({ name: 'Home' });
       } else {
         this.$router.go(-1);

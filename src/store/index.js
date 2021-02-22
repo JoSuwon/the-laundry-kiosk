@@ -133,6 +133,7 @@ export default new Vuex.Store({
         });
         return true;
       } catch (err) {
+        console.log(err, err.message);
         commit('SET_USER', { companyId: company, phone, point: 0, newUser: true });
         return false;
       }
@@ -193,6 +194,7 @@ export default new Vuex.Store({
     },
     async runMachine({ state }) {
       const form = state.runAction;
+      console.log(form);
       const res = await kioskAPI({
         method: 'post',
         url: '/run',
