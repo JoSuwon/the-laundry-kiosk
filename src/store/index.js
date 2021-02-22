@@ -133,7 +133,7 @@ export default new Vuex.Store({
         });
         return true;
       } catch (err) {
-        console.log(err, err.message);
+        // console.log(err, err.message);
         commit('SET_USER', { companyId: company, phone, point: 0, newUser: true });
         return false;
       }
