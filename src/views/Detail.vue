@@ -98,6 +98,7 @@ import DefaultLayout from '@/components/layout/DefaultLayout.vue';
 import CardModal from '@/components/modal/CardModal.vue';
 import CashModal from '@/components/modal/CashModal.vue';
 import { mapActions, mapMutations, mapState } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   name: 'Detail',
@@ -157,10 +158,8 @@ export default {
       run: 'runMachine',
     }),
     nextStep() {
-      console.log(this.count);
-      return;
-      // if (this.type === 'Charge') return this.payment();
-      // else if (this.type === 'Use') return this.runMachine();
+      if (this.type === 'Charge') return this.payment();
+      else if (this.type === 'Use') return this.runMachine();
     },
     payment() {
       // 결제하기
@@ -174,18 +173,58 @@ export default {
       this.$refs.progressModal.show(true);
       await this.delay(2000);
       this.appendAction({ price });
+      this.serverPayRequest();
+      // const res = await this.chargePoint();
+      // // console.log(res);
+      // if (res.status === 200) {
+      //   const point = res.data.havePoint;
+      //   this.appendUser({ point });
+      // }
+      // this.$refs.progressModal.show(false);
+      // this.$router.push({ name: 'Finish', params: { type: this.type } });
+    },
+    serverPayRequest: debounce(async function () {
       const res = await this.chargePoint();
-      // console.log(res);
-      if (res.status === 200) {
+      if(res.status === 200) {
         const point = res.data.havePoint;
         this.appendUser({ point });
       }
       this.$refs.progressModal.show(false);
       this.$router.push({ name: 'Finish', params: { type: this.type } });
-    },
+    }, 2000),
     async runMachine() {
       this.$refs.progressModal.show(true);
       await this.delay(2000);
+      this.serverRunRequest();
+      // this.run()
+      //   .then(res => {
+      //     // console.log(res);
+      //     const point = res.data.point;
+      //     // this.appendUser({ point: parseInt(point) });
+      //     this.appendUser({ point });
+      //     // this.$refs.progressModal.show(false);
+      //     this.$router.push({ name: 'Finish', params: { type: this.type } });
+      //   })
+      //   .catch(error => {
+      //     // 405 = 장비통신불가능
+      //     // 406 = 장비통신불가능
+      //     // 401 = 회원의포인트가 부족
+      //     if (error.response.status === 401) {
+      //       // this.$refs.progressModal.show(false);
+      //       this.errorMsg = '보유하신 포인트가 부족합니다';
+      //       this.$refs.errorModal.show(true);
+      //     } else {
+      //       // console.log(error.response);
+      //       // this.$refs.progressModal.show(false);
+      //       this.errorMsg = '장비와의 통신이 원활하지 않습니다';
+      //       this.$refs.errorModal.show(true);
+      //     }
+      //   })
+      //   .finally(() => {
+      //     this.$refs.progressModal.show(false);
+      //   });
+    },
+    serverRunRequest: debounce(function () {
       this.run()
         .then(res => {
           // console.log(res);
@@ -213,12 +252,7 @@ export default {
         .finally(() => {
           this.$refs.progressModal.show(false);
         });
-      // console.log('res', res);
-      // if(res.status === 200) {
-      //   const point = res.data.point;
-      //   this.appendUser({ point });
-      // }
-    },
+    }, 2000),
   },
 };
 </script>

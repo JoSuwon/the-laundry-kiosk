@@ -32,7 +32,7 @@
             <v-btn text @click="inputButton(0)">0</v-btn>
             <v-btn text @click="inputButton('delete')"><v-icon>mdi-arrow-left</v-icon></v-btn>
           </div>
-          <div class="pwFind">
+          <div class="pwFind" v-if="type === 'check'">
             <v-btn text @click="$refs.confirmModal.show(true)">
               <v-icon>mdi-lock</v-icon>
               <span>비밀번호 찾기</span>
