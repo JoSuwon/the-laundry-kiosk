@@ -194,7 +194,7 @@ export default new Vuex.Store({
     },
     async runMachine({ state }) {
       const form = state.runAction;
-      console.log(form);
+      // console.log(form);
       const res = await kioskAPI({
         method: 'post',
         url: '/run',

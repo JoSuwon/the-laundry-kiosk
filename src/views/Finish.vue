@@ -5,7 +5,7 @@
         <v-icon>mdi-check-circle</v-icon>
         <h2>결제가 완료되었습니다</h2>
         <p v-if="type === 'Use'">
-          <b>A유닛세탁기</b>로 돌아가 세탁코스를 다시 한번 확인 후 <b>시작버튼</b>을 눌러주세요
+          <b>{{ selectedMachine.name }}</b>로 돌아가 세탁코스를 다시 한번 확인 후 <b>시작버튼</b>을 눌러주세요
         </p>
         <p v-if="type === 'Charge'">
           충전된 포인트금액으로 장비를 사용해보세요<br>
