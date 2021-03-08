@@ -53,7 +53,8 @@ async function createWindow() {
   });
 
   // win.setMenu(null);
-  if(!isDevelopment) win.setMenu(null);
+  // if(!isDevelopment) win.setMenu(null);
+  win.webContents.openDevTools();
   window = win;
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {

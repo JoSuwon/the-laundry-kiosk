@@ -29,6 +29,10 @@ function request(params) {
           return reject(new Error('카드결제 승인 오류'));
         } else if (statusStr === '9999') {
           return reject(new Error('카드결제 취소'));
+        } else {
+          const { resultString } = results;
+          const errorMessage = resultString.substring(101, 123);
+          return reject(new Error(errorMessage));
         }
       } catch (error) {
         return reject(error);
