@@ -7,8 +7,11 @@
 			<div class="shopNumber">
 				{{ company.tel }}
 			</div>
-			<div class="cardModule">
+			<div class="cardModule" v-if="cardVersionToggle" @click="toggleVisible">
 				{{ cardModule }}
+			</div>
+			<div class="cardModule" v-if="!cardVersionToggle" @click="toggleVisible">
+				V {{ version }}
 			</div>
 		</div>
 		<div class="time">
@@ -18,6 +21,7 @@
 </template>
 
 <script>
+import { remote } from 'electron';
 import { mapState } from 'vuex';
 export default {
   name: 'StateBar',
@@ -25,6 +29,7 @@ export default {
     return {
       now: Date.now(),
       timeListener: null,
+			cardVersionToggle: true,
     };
   },
   mounted() {
@@ -39,7 +44,20 @@ export default {
 				return state.cardModule?.type ? state.cardModule.type.toUpperCase() : '';
 			}
     }),
+		version() {
+			return remote.app.getVersion();
+		}
   },
+	methods: {
+		toggleVisible() {
+			this.cardVersionToggle = !this.cardVersionToggle;
+			setTimeout(() => {
+				if(!this.cardVersionToggle) {
+					this.cardVersionToggle = true;
+				}
+			}, 5000);
+		}
+	},
   beforeDestroy() {
     clearInterval(this.timeListener);
   },
