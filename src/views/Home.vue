@@ -78,11 +78,13 @@ export default {
       hideNoticePage: state => state.kiosk.Options.hideNoticePage,
     }),
   },
-  watch: {
-    logoutCount(newValue) {
-      if(newValue === 15) this.$router.push({ name: 'AdminLogin' });
-    },
-  },
+  // watch: {
+  //   logoutCount(newValue) {
+      // if(newValue === 15) this.$router.push({ name: 'AdminLogin' });
+      // if(newValue >= 15) this.$emit('logoutPossible');
+      // else this.$emit('logoutImpossible');
+  //   },
+  // },
   mounted() {
     this.$store.commit('CLEAR_ACTION');
   },

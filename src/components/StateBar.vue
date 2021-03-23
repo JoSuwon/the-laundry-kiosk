@@ -1,7 +1,7 @@
 <template> 
 	<div class="stateBar">
 		<div class="shop">
-			<div class="shopName">
+			<div class="shopName" @click="leftClick">
 				{{ company.name }}
 			</div>
 			<div class="shopNumber">
@@ -14,7 +14,7 @@
 				V {{ version }}
 			</div>
 		</div>
-		<div class="time">
+		<div class="time" @click="rightClick">
 			{{ now | moment('HH:mm') }}
 		</div>
 	</div>
@@ -30,6 +30,8 @@ export default {
       now: Date.now(),
       timeListener: null,
 			cardVersionToggle: true,
+			leftCount: 0,
+			rightCount: 0,
     };
   },
   mounted() {
@@ -42,12 +44,23 @@ export default {
 			company: state => state.company,
 			cardModule: state => {
 				return state.cardModule?.type ? state.cardModule.type.toUpperCase() : '';
-			}
+			},
     }),
 		version() {
 			return remote.app.getVersion();
 		},
+		routeName() {
+			return this.$route.name;
+		}
   },
+	watch: {
+		routeName(newValue) {
+			if(newValue === 'Home') {
+				this.leftCount = 0;
+				this.rightCount = 0;
+			}
+		}
+	},
 	methods: {
 		toggleVisible() {
 			this.cardVersionToggle = !this.cardVersionToggle;
@@ -56,7 +69,28 @@ export default {
 					this.cardVersionToggle = true;
 				}
 			}, 5000);
-		}
+		},
+		leftClick() {
+			if(this.routeName !== 'Home') return;
+
+			if(this.rightCount === 0 && this.leftCount < 3) {
+				this.leftCount++;
+			} else if(this.rightCount === 3 && this.leftCount < 7) {
+				this.leftCount++;
+			}
+		},
+		rightClick() {
+			if(this.routeName !== 'Home') return;
+
+			if(this.leftCount === 3 && this.rightCount < 3) {
+				this.rightCount++;
+			} else if(this.leftCount === 7 && this.rightCount < 7) {
+				this.rightCount++;
+				if(this.rightCount === 7) {
+					this.$router.push({ name: 'AdminLogin' });
+				}
+			}
+		},
 	},
   beforeDestroy() {
     clearInterval(this.timeListener);

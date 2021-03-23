@@ -30,7 +30,7 @@ export default {
     const { name } = this.$route;
     if(this.ignoreIdlePageName.includes(name)) return;
     this.$router.replace({ name: 'Home' });
-  }
+  },
 };
 </script>
 
